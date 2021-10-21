@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import StorysList from '../components/storysList'
+import UserFilterRequest from '../components/UserFilterRequest';
 
 const HackerContainer = () => {
 
@@ -28,32 +29,35 @@ const HackerContainer = () => {
             })
             Promise.all(articlePromises).then((allData) => {setStories(allData)})
         })
-
-        
     }
-
-
 
     useEffect(() =>{
         getStories()
-
     }, [])
 
-    // useEffect(() => {
-    //     getIndex()
-    // }, [])
+    const onFormSubmit = (searchTerm) => {
+        console.log(searchTerm)
+        // return filteredStories(searchTerm)
+    }
+
+    // const filteredStories = () => {
+    //     const filteredList = []
+    //     return console.log(filteredList = stories.filter(searchTermPresent))
+    //     // 
+    // }
+      
+    //     // return console.log(filteredList = stories.filter(story, searchTerm => 
+    //     //     //     story.title.includes(searchTerm)))
+
+    // const searchTermPresent = (story, searchTerm) => {
+    //     return story.title.includes(searchTerm)
+    // }
 
     return (
         <>
             <h2> Hacker News:</h2>
             <StorysList stories={stories} />
-            {/* <FilterByForm stories={stories}  handelChange={handelChange} /> */}
-            <form >
-                <label>
-                    Filter by:
-                    <input type="text" id="formInput"></input>
-                </label>
-            </form>
+            <UserFilterRequest stories={stories} onFormSubmit={onFormSubmit}/>
         </>
     )
 
