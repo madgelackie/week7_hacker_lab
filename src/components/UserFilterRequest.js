@@ -18,6 +18,8 @@ const UserFilterRequest = ({onFormSubmit}) => {
     onFormSubmit({
         searchTerm: termToSubmit
     });
+
+    setSearchTerm("")
 }
 
     return (

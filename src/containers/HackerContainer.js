@@ -22,8 +22,8 @@ const HackerContainer = () => {
         fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
         .then(response => response.json())
         .then(articleIDs => {
-            const firstTenArticles = articleIDs.slice(0, 10)
-            const articlePromises = firstTenArticles.map((articleID) => {
+            const first20Articles = articleIDs.slice(0, 20)
+            const articlePromises = first20Articles.map((articleID) => {
                 return fetch(`https://hacker-news.firebaseio.com/v0/item/${articleID}.json`)
                 .then(response => response.json())
             })
@@ -36,10 +36,12 @@ const HackerContainer = () => {
     }, [])
 
     const onFormSubmit = (searchTerm) => {
-        console.log(searchTerm)
-        // return filteredStories(searchTerm)
+        console.log(searchTerm) 
+        let filteredList = []
+        filteredList = stories.filter(story => story.title.includes("look"))
+        console.log(filteredList)
     }
-
+    // filteredList = stories.filter(story => story.title.includes(searchTerm.value))
     // const filteredStories = () => {
     //     const filteredList = []
     //     return console.log(filteredList = stories.filter(searchTermPresent))
@@ -58,6 +60,7 @@ const HackerContainer = () => {
             <h2> Hacker News:</h2>
             <StorysList stories={stories} />
             <UserFilterRequest stories={stories} onFormSubmit={onFormSubmit}/>
+            {/* {searchTerm ? <FilteredList /> :null} */}
         </>
     )
 
